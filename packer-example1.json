@@ -1,0 +1,39 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "eu-west-2",
+    "source_ami_filter": {
+      "filters": {
+      "virtualization-type": "hvm",
+      "name": "amzn-ami-hvm*-gp2",
+      "root-device-type": "ebs"
+      },
+      "owners": ["137112412989", "591542846629", "801119661308", "102837901569", "013907871322", "206029621532", "286198878708", "443319210888"],
+      "most_recent": true
+    },
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "packer-example-nm {{timestamp}}"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sleep 30",
+      "sudo yum update -y",
+      "sudo yum install -y unzip",
+      "sudo yum install -y git",
+      "sudo yum install -y libwww-perl libdatetime-perl",
+      "sudo yum install -y awscli",
+      "sudo yum install -y libwww-perl libdatetime-perl",
+      "curl http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip -O",
+      "sudo unzip CloudWatchMonitoringScripts-1.2.1.zip -d /opt",
+      "rm -f CloudWatchMonitoringScripts-1.2.1.zip"
+    ]
+  }]
+}
