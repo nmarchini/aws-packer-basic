@@ -24,3 +24,4 @@ The packer file performs the following tasks
  - Downloads the **Amazon CloudWatch monitoring** scripts 
  - unzips CloudWatch scripts to /opt and cleans up
  - Installs **Ansible** via pip
+ - Installs **AWS CloudWatch Logs Agent**

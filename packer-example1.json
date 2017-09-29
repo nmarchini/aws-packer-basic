@@ -1,7 +1,8 @@
 {
   "variables": {
     "aws_access_key": "",
-    "aws_secret_key": ""
+    "aws_secret_key": "",
+    "aws_region": "{{env `AWS_REGION`}}"
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -31,6 +32,7 @@
       "curl http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip -O",
       "sudo unzip CloudWatchMonitoringScripts-1.2.1.zip -d /opt",
       "rm -f CloudWatchMonitoringScripts-1.2.1.zip",
+      "sudo yum install -y awslogs",
       "sudo pip install ansible"
     ]
   }]
