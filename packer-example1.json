@@ -19,21 +19,19 @@
     },
     "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
-    "ami_name": "packer-example-nm {{timestamp}}"
+    "ami_name": "amazon-linux-packer-basic-{{timestamp}}"
   }],
   "provisioners": [{
     "type": "shell",
     "inline": [
       "sleep 30",
       "sudo yum update -y",
-      "sudo yum install -y unzip",
+      "sudo pip install --upgrade awscli",
       "sudo yum install -y git",
-      "sudo yum install -y libwww-perl libdatetime-perl",
-      "sudo yum install -y awscli",
-      "sudo yum install -y libwww-perl libdatetime-perl",
       "curl http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip -O",
       "sudo unzip CloudWatchMonitoringScripts-1.2.1.zip -d /opt",
-      "rm -f CloudWatchMonitoringScripts-1.2.1.zip"
+      "rm -f CloudWatchMonitoringScripts-1.2.1.zip",
+      "sudo pip install ansible"
     ]
   }]
 }
